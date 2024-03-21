@@ -22,6 +22,7 @@ export type OxygenPluginOptions = {
   debug?: boolean;
   inspectorPort?: number;
   env?: Record<string, any>;
+  disableNetworkFilter?: boolean;
 };
 
 // Note: Vite resolves extensions like .js or .ts automatically.

@@ -51,6 +51,7 @@ export async function startWorkerdServer({
   buildPathWorkerFile,
   buildPathClient,
   env,
+  disableNetworkFilter = false,
 }: MiniOxygenOptions): Promise<MiniOxygenInstance> {
   const privateInspectorPort = await findPort(PRIVATE_WORKERD_INSPECTOR_PORT);
 
@@ -136,6 +137,9 @@ export async function startWorkerdServer({
               transformLocation: () => absoluteBundlePath,
             }),
           },
+          ...(disableNetworkFilter && {
+            outboundService: (request) => fetch(request.url, request),
+          }),
         },
       ],
     } satisfies MiniflareOptions);

@@ -149,6 +149,9 @@ export function oxygen(pluginOptions: OxygenPluginOptions = {}): Plugin[] {
             debug: cliOptions?.debug ?? pluginOptions.debug ?? false,
             inspectorPort:
               cliOptions?.inspectorPort ?? pluginOptions.inspectorPort ?? 9229,
+            disableNetworkFilter:
+              cliOptions?.disableNetworkFilter ??
+              pluginOptions.disableNetworkFilter,
           });
         });
 

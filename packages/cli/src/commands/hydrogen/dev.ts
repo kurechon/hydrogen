@@ -66,6 +66,7 @@ export default class Dev extends Command {
     }),
     ...commonFlags.diff,
     ...commonFlags.customerAccountPush,
+    ...commonFlags.disableNetworkFilter,
   };
 
   async run(): Promise<void> {
@@ -98,6 +99,7 @@ type DevOptions = {
   inspectorPort: number;
   customerAccountPush?: boolean;
   cliConfig?: Config;
+  disableNetworkFilter?: boolean;
 };
 
 export async function runDev({
@@ -114,6 +116,7 @@ export async function runDev({
   inspectorPort,
   customerAccountPush: customerAccountPushFlag = false,
   cliConfig,
+  disableNetworkFilter,
 }: DevOptions) {
   if (!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
 
@@ -214,6 +217,7 @@ export async function runDev({
         buildPathWorkerFile,
         buildPathClient,
         env: await envPromise,
+        disableNetworkFilter,
       },
       legacyRuntime,
     );

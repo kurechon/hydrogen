@@ -9,6 +9,7 @@ export type MiniOxygenOptions = {
   debug?: boolean;
   inspectorPort: number;
   assetsPort: number;
+  disableNetworkFilter?: boolean;
 };
 
 export type MiniOxygenInstance = {

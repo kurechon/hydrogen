@@ -57,6 +57,7 @@ export default class DevVite extends Command {
     }),
     ...commonFlags.diff,
     ...commonFlags.customerAccountPush,
+    ...commonFlags.disableNetworkFilter,
   };
 
   async run(): Promise<void> {
@@ -92,6 +93,7 @@ type DevOptions = {
   isLocalDev?: boolean;
   customerAccountPush?: boolean;
   cliConfig: Config;
+  disableNetworkFilter?: boolean;
 };
 
 export async function runDev({
@@ -109,6 +111,7 @@ export async function runDev({
   isLocalDev = false,
   customerAccountPush: customerAccountPushFlag = false,
   cliConfig,
+  disableNetworkFilter,
 }: DevOptions) {
   if (!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
 
@@ -153,6 +156,7 @@ export async function runDev({
         ssrEntry,
         envPromise,
         inspectorPort,
+        disableNetworkFilter,
         disableVirtualRoutes,
       },
     }),

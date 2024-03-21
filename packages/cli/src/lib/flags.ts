@@ -177,6 +177,13 @@ export const commonFlags = {
       env: 'SHOPIFY_HYDROGEN_FLAG_CUSTOMER_ACCOUNT_PUSH',
     }),
   },
+  disableNetworkFilter: {
+    'disable-network-filter': Flags.boolean({
+      description:
+        'For security, only connections to public domains are allowed in the local runtime by default. Use this flag to disable the network filter.',
+      env: 'SHOPIFY_HYDROGEN_FLAG_BYPASS_NETWORK_FILTER',
+    }),
+  },
 } satisfies Record<string, Record<Lowercase<string>, FlagProps>>;
 
 export function flagsToCamelObject<T extends Record<string, any>>(obj: T) {

@@ -1,7 +1,7 @@
 import {fetchModule, type ViteDevServer} from 'vite';
 import {fileURLToPath} from 'node:url';
 import crypto from 'node:crypto';
-import {Miniflare, NoOpLog, Request, type Response} from 'miniflare';
+import {Miniflare, NoOpLog, fetch, Request, type Response} from 'miniflare';
 import {OXYGEN_HEADERS_MAP, logRequestLine} from '../mini-oxygen/common.js';
 import {
   PRIVATE_WORKERD_INSPECTOR_PORT,
@@ -29,6 +29,7 @@ const oxygenHeadersMap = Object.values(OXYGEN_HEADERS_MAP).reduce(
 export type InternalMiniOxygenOptions = {
   setupScripts?: Array<(viteUrl: string) => void>;
   services?: Record<string, (request: Request) => Response | Promise<Response>>;
+  disableNetworkFilter?: boolean;
 };
 
 type MiniOxygenViteOptions = InternalMiniOxygenOptions &
@@ -47,6 +48,7 @@ export async function startMiniOxygenRuntime({
   inspectorPort,
   workerEntryFile,
   setupScripts,
+  disableNetworkFilter = false,
 }: MiniOxygenViteOptions) {
   const [publicInspectorPort, privateInspectorPort] = await Promise.all([
     findPort(inspectorPort),
@@ -88,6 +90,9 @@ export async function startMiniOxygenRuntime({
         wrappedBindings: {
           __VITE_SETUP_ENV: 'setup-environment',
         },
+        ...(disableNetworkFilter && {
+          outboundService: (request) => fetch(request.url, request),
+        }),
       },
       {
         name: 'setup-environment',

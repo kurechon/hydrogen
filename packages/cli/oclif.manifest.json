@@ -525,6 +525,13 @@
           "required": false,
           "allowNo": false,
           "type": "boolean"
+        },
+        "disable-network-filter": {
+          "description": "For security, only connections to public domains are allowed in the local runtime by default. Use this flag to disable the network filter.",
+          "env": "SHOPIFY_HYDROGEN_FLAG_BYPASS_NETWORK_FILTER",
+          "name": "disable-network-filter",
+          "allowNo": false,
+          "type": "boolean"
         }
       },
       "hasDynamicHelp": false,
@@ -653,6 +660,13 @@
           "env": "SHOPIFY_HYDROGEN_FLAG_CUSTOMER_ACCOUNT_PUSH",
           "name": "customer-account-push",
           "required": false,
+          "allowNo": false,
+          "type": "boolean"
+        },
+        "disable-network-filter": {
+          "description": "For security, only connections to public domains are allowed in the local runtime by default. Use this flag to disable the network filter.",
+          "env": "SHOPIFY_HYDROGEN_FLAG_BYPASS_NETWORK_FILTER",
+          "name": "disable-network-filter",
           "allowNo": false,
           "type": "boolean"
         }
