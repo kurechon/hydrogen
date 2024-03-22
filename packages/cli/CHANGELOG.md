@@ -1,5 +1,32 @@
 # @shopify/cli-hydrogen
 
+## 7.2.0
+
+### Minor Changes
+
+- Support scaffolding projects from external repositories using the `--template` flag. ([#1867](https://github.com/Shopify/hydrogen/pull/1867)) by [@frandiox](https://github.com/frandiox)
+
+  The following examples are equivalent:
+
+  ```sh
+  npm create @shopify/hydrogen -- --template shopify/hydrogen-demo-store
+  npm create @shopify/hydrogen -- --template github.com/shopify/hydrogen-demo-store
+  npm create @shopify/hydrogen -- --template https://github.com/shopify/hydrogen-demo-store
+  ```
+
+- ✨ Added `npx shopify hydrogen customer-account push` command to CLI that takes the url in `--dev-origin` and push the config to Shopify Admin ([#1804](https://github.com/Shopify/hydrogen/pull/1804)) by [@michenly](https://github.com/michenly)
+
+  ✨ Added `--customer-account-push` flag to the dev CLI command. This flag is meant be use for storefront that uses [Customer Account API](https://shopify.dev/docs/api/customer). It create a tunnel, and push the tunnel url to Shopify Admin.
+  ✨ skeleton template now use `dev --customer-account-push` to start dev server
+
+### Patch Changes
+
+- Bump internal workerd dependency to fix a bug when running on Node 21. ([#1866](https://github.com/Shopify/hydrogen/pull/1866)) by [@frandiox](https://github.com/frandiox)
+
+- Add `--quickstart` flag option to init/create command ([#1822](https://github.com/Shopify/hydrogen/pull/1822)) by [@gfscott](https://github.com/gfscott)
+
+- Handle duplicate storefront names when running `link` command ([#1860](https://github.com/Shopify/hydrogen/pull/1860)) by [@gfscott](https://github.com/gfscott)
+
 ## 7.1.2
 
 ### Patch Changes

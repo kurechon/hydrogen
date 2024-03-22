@@ -1,5 +1,11 @@
 # @shopify/hydrogen-react
 
+## 2024.1.2
+
+### Patch Changes
+
+- Fix internal type issues. ([#1866](https://github.com/Shopify/hydrogen/pull/1866)) by [@frandiox](https://github.com/frandiox)
+
 ## 2024.1.1
 
 ### Patch Changes

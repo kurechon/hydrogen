@@ -1,5 +1,52 @@
 # @shopify/hydrogen
 
+## 2024.1.5
+
+### Patch Changes
+
+- Fix bug where `storefrontRedirect` would return an error on soft page navigations. Also change the redirect status code from 301 to 302. ([#1880](https://github.com/Shopify/hydrogen/pull/1880)) by [@blittle](https://github.com/blittle)
+
+- Allow calling the cart `.get()` method right after creating a new cart with ([#1865](https://github.com/Shopify/hydrogen/pull/1865)) by [@blittle](https://github.com/blittle)
+
+  one of the mutation methods: `create()`, `addLines()`, `updateDiscountCodes()`, `updateBuyerIdentity()`, `updateNote()`, `updateAttributes()`, `setMetafields()`.
+
+  ```ts
+  import {
+    createCartHandler,
+    cartGetIdDefault,
+    cartSetIdDefault,
+  } from '@shopify/hydrogen';
+
+  const cartHandler = createCartHandler({
+    storefront,
+    getCartId: cartGetIdDefault(request.headers),
+    setCartId: cartSetIdDefault(),
+    cartQueryFragment: CART_QUERY_FRAGMENT,
+    cartMutateFragment: CART_MUTATE_FRAGMENT,
+  });
+
+  await cartHandler.addLines([{merchandiseId: '...'}]);
+  // This change fixes a bug where `cart` would be null, even though a
+  // new cart was created when adding a line item
+  const cart = await cartHandler.get();
+  ```
+
+- ✨ Add `postLogoutRedirectUri` option to customer account client's logout method ([#1871](https://github.com/Shopify/hydrogen/pull/1871)) by [@michenly](https://github.com/michenly)
+
+- ✨ Added `npx shopify hydrogen customer-account push` command to CLI that takes the url in `--dev-origin` and push the config to Shopify Admin ([#1804](https://github.com/Shopify/hydrogen/pull/1804)) by [@michenly](https://github.com/michenly)
+
+  ✨ Added `--customer-account-push` flag to the dev CLI command. This flag is meant be use for storefront that uses [Customer Account API](https://shopify.dev/docs/api/customer). It create a tunnel, and push the tunnel url to Shopify Admin.
+  ✨ skeleton template now use `dev --customer-account-push` to start dev server
+
+- Fix internal type issues. ([#1866](https://github.com/Shopify/hydrogen/pull/1866)) by [@frandiox](https://github.com/frandiox)
+
+- Fix default content secuirty policy directive for `frameAncestors`. Resolves [#1783](https://github.com/Shopify/hydrogen/issues/1793) ([#1883](https://github.com/Shopify/hydrogen/pull/1883)) by [@blittle](https://github.com/blittle)
+
+- Allow ui_locale to be pass to customer account login ([#1842](https://github.com/Shopify/hydrogen/pull/1842)) by [@wizardlyhel](https://github.com/wizardlyhel)
+
+- Updated dependencies [[`5f1295fe`](https://github.com/Shopify/hydrogen/commit/5f1295fe60b86396f364fefef339248a444c988a)]:
+  - @shopify/hydrogen-react@2024.1.2
+
 ## 2024.1.4
 
 ### Patch Changes
